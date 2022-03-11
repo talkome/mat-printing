@@ -7,12 +7,6 @@
 using namespace std;
 
 string ariel::mat(const int rows, const int cols, const char c1, const char c2) {
-//    int num1 = rows %10;
-//    int num2 = cols %10;
-//    if(isdigit(num1) != 1 || isdigit(num2) != 1){
-//        throw invalid_argument("Invalid Input");
-//    }
-
     if(rows > 70 || cols > 70){
         throw invalid_argument("Input too large");
     }
@@ -25,15 +19,11 @@ string ariel::mat(const int rows, const int cols, const char c1, const char c2) 
         throw invalid_argument("This Mat is not possible");
     }
 
-    if (c1 < 33 || c1 > 126) {
+    if (c1 < 33 || c1 > 126 || c2 < 33 || c2 > 126) {
         throw invalid_argument("Invalid Character");
     }
 
-    if (c2 < 33 || c2 > 126) {
-        throw invalid_argument("Invalid Character");
-    }
-
-    unordered_set<char> s = {'\n','\t', ' ', '\r'};
+    unordered_set<char> s = {'\n','\t', ' ', '\r','\a','\b','\f','\v'};
     if (s.find(c1) != s.end() && s.find(c2) != s.end()) {
         throw invalid_argument("Invalid Character");
     }
