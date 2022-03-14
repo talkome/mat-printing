@@ -7,7 +7,8 @@
 using namespace std;
 
 string ariel::mat(const int rows, const int cols, const char c1, const char c2) {
-    if(rows > 70 || cols > 70){
+    const int max = 70;
+    if(rows > max || cols > max){
         throw invalid_argument("Input too large");
     }
 
@@ -19,7 +20,9 @@ string ariel::mat(const int rows, const int cols, const char c1, const char c2) 
         throw invalid_argument("This Mat is not possible");
     }
 
-    if (c1 < 33 || c1 > 126 || c2 < 33 || c2 > 126) {
+    const int magic_num1 = 33;
+    const int magic_num2 = 126;
+    if (c1 < magic_num1 || c1 > magic_num2 || c2 < magic_num1 || c2 > magic_num2) {
         throw invalid_argument("Invalid Character");
     }
 
