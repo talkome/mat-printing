@@ -7,11 +7,6 @@
 using namespace std;
 
 string ariel::mat(const int rows, const int cols, const char c1, const char c2) {
-    const int max = 70;
-    if(rows > max || cols > max){
-        throw invalid_argument("Input too large");
-    }
-
     if (rows % 2 == 0 || cols % 2 == 0) {
         throw invalid_argument("Mat size is always odd");
     }
