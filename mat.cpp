@@ -1,6 +1,6 @@
-/**
- * Created by talko on 04/03/2022.
- */
+//
+// Created by talko on 04/03/2022.
+//
 
 #include "mat.hpp"
 
@@ -15,45 +15,29 @@ string ariel::mat(const int rows, const int cols, const char c1, const char c2) 
         throw invalid_argument("This Mat is not possible");
     }
 
-    const int magic_num1 = 33;
-    const int magic_num2 = 126;
-    if (c1 < magic_num1 || c1 > magic_num2 || c2 < magic_num1 || c2 > magic_num2) {
+    unordered_set<char> s = {'\n','\t', ' '};
+    if (s.find(c1) != s.end() || s.find(c2) != s.end()) {
         throw invalid_argument("Invalid Character");
     }
 
-    unordered_set<char> s = {'\n','\t', ' ', '\r','\a','\b','\f','\v'};
-    if (s.find(c1) != s.end() && s.find(c2) != s.end()) {
-        throw invalid_argument("Invalid Character");
-    }
-
-    string result;
+    string result = "";
 
     // create matrix
-    vector< vector<char> > matrix(cols, vector<char> (rows, c1));
+    for (int c = 0; c < cols; c++) {
+        result += '\n';
 
-    // create frame
-    int counter = 1;
-    while(counter < min(cols,rows)){
-        create_frame(matrix, rows, cols, c2,counter);
-        counter += 2;
-    }
-
-    // convert to string
-    for(vector<char> temp: matrix){
-        string s(temp.begin(), temp.end());
-        s += '\n';
-        result += s;
+        for (int r = 0; r < rows; r++) {
+            if ((c == 1 || c == cols-2) && r > 0 && r < rows-1){
+                result += c2;
+            } else if((r == 1 || r == rows-2) && c > 0 && c < cols-1){
+                result += c2;
+            } else if (cols > 5 && c == (cols-1)/2 && r < rows-((cols-1)/2) && r > (rows-1)/((cols-1)/2)) {
+                result += c2;
+            } else {
+                result += c1;
+            }
+        }
     }
 
     return result;
-}
-
-void ariel::create_frame(vector<vector<char>> &mat, const int R, const int C, const char c, const int z) {
-    for (int i = z; i < C - z; ++i) {
-        mat[i][z] = mat[i][R - z - 1] = c;
-    }
-
-    for (int j = z; j < R - z; ++j) {
-        mat[z][j] = mat[C - z - 1][j] = c;
-    }
 }

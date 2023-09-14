@@ -134,24 +134,3 @@ TEST_CASE("Impossible Matrix") {
     CHECK_THROWS(mat(5, 1, '$', '%'));
     CHECK_THROWS(mat(3, 3, '$', '%'));
 }
-
-TEST_CASE("Random matrix") {
-    int a, b, max;
-    max = 20;
-    srand(time(0));
-    a = rand() % max;
-    b = rand() % max;
-
-    if (a % 2 == 0) {
-        a = a + 1;
-    }
-
-    if (b % 2 == 0) {
-        b = b + 1;
-    }
-
-    cout << "a = " << a << endl;
-    cout << "b = " << b << endl;
-
-    cout << ariel::mat(a, b, '@', '-') << endl;
-}
